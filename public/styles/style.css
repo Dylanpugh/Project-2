@@ -163,3 +163,9 @@ background-color:rgba(202, 202, 202, 0.45);
   background-color: #ddd;
   border-radius: 5px;
 }
+
+.label {
+  color: white;
+  background-color: #800000;
+
+}
