@@ -1,0 +1,165 @@
+@font-face{
+    font-family: myFirstFont;
+    src: url("Theatrical.woff");
+}
+
+body{
+    background: url("movies.jpg") center;
+    
+}
+
+#header{
+    color: #FFD700;
+    font-size: 50px;
+    font-family: myFirstFont;
+    text-shadow: 4px 4px #800000;
+    
+    
+}
+
+
+hr{
+    border: 5px solid #800000;
+}
+
+h3{
+    color: #800000;
+    text-shadow: 1px 1px #FFD700;
+
+}
+
+
+#bar {
+    background-color: rgb(124, 115, 115);
+}
+
+#activeItem {
+    color: #ffd700;
+}
+
+#item {
+    color: #ffd700;
+}
+
+#header {
+    color: #ffd700;
+}
+
+
+
+#description {
+    color: #800000;
+}
+
+.ui.centered.card {
+	width:200px;
+}
+
+.movie-container {
+    background-color: #000;
+}
+
+.modal-backdrop {
+    background-color: red;
+ }
+
+
+
+
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+iframe{
+    height: 600px;
+    width: 800px;
+}
+
+.modal-content{
+    background-color: black;
+    border: none;
+    margin: auto;
+    max-width: 800px;
+}
+
+.close {
+    display:none;
+}
+
+h4 {
+    color: #ffd700;
+}
+
+.video-btn {
+	margin-bottom:10px !important;
+}
+
+.card {
+	text-align:center !important;
+}
+.ui.cards a.card:hover, .ui.link.card:hover, .ui.link.cards .card:hover, a.ui.card:hover {
+background-color:rgba(202, 202, 202, 0.45);
+}
+.ui.centered.card{
+    background-color: black;
+ }
+
+.pagination li {
+  display:inline-block;
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  
+}
+.pagination {
+  display: inline-block;
+}
+
+
+
+.pagination li.active {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination li:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}
