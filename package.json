@@ -1,6 +1,9 @@
 {
   "name": "project-2",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.0.0"
+  },
   "description": "Project 2 Starter",
   "main": "server.js",
   "scripts": {
@@ -16,6 +19,7 @@
     "express-handlebars": "^3.0.0",
     "fs": "0.0.1-security",
     "mysql2": "^1.6.5",
+    "node": "^10.0.0",
     "npi": "^0.1.0",
     "path": "^0.12.7",
     "semantic-ui": "^2.4.2",
@@ -38,9 +42,13 @@
     "type": "git",
     "url": "git+https://github.com/Dylanpugh/Project-2.git"
   },
-  "author": "",
+  "author": "Todd Williams",
   "bugs": {
     "url": "https://github.com/Dylanpugh/Project-2/issues"
   },
-  "homepage": "https://github.com/Dylanpugh/Project-2#readme"
+  "homepage": "https://github.com/Dylanpugh/Project-2#readme",
+  "keywords": [
+    "Movie",
+    "Application"
+  ]
 }
