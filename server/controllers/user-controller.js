@@ -3,18 +3,11 @@ const bcrypt = require("bcrypt-nodejs")
 
 const router = express.Router();
 
-// grab the User model from the models folder, the sequelize
-// index.js file takes care of the exporting for us and the
-// syntax below is called destructuring, its an es6 feature
 const { User } = require('../models');
 
-/* Register Route
-========================================================= */
+/* Register Route */
 router.post('/register', async (req, res) => {
 
-  // hash the password provided by the user with bcrypt so that
-  // we are never storing plain text passwords. This is crucial
-  // for keeping your db clean of sensitive data
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(req.body.password, salt);
 
@@ -27,8 +20,6 @@ router.post('/register', async (req, res) => {
     // data will be an object with the user and it's authToken
     let data = await user.authorize();
 
-    // send back the new user and auth token to the
-    // client { user, authToken }
     return res.json(data);
 
   } catch(err) {
@@ -37,13 +28,44 @@ router.post('/register', async (req, res) => {
 
 });
 
-/* Login Route
-========================================================= */
+router.get("/api/userData", function(req, res) {
+ console.log(req.user.dataValues.id);
+ User.findOne({  
+  where: {id: req.user.dataValues.id},
+})
+
+
+.then(User => {
+  console.log('Found user:' + User);
+});
+
+
+  });
+  router.post("/api/userData",function(req,res){
+    User.findOne({  
+      where: {id: req.user.dataValues.id},
+    })
+    .then(user => {
+      user.updateAttributes({
+        actor1: req.body.actor1,
+        actor2: req.body.actor2,
+        actor3: req.body.actor3,
+        movie1: req.body.movie1,
+        movie2: req.body.movie2,
+        movie3: req.body.movie3,
+        movie4: req.body.movie4,
+        movie5: req.body.movie5,
+        genre: req.body.genre
+      });
+    });
+ 
+  });
+
+
+/* Login Route */
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
   
-    // if the username / password is missing, we use status code 400
-    // indicating a bad request was made and send back a message
     if (!username || !password) {
       return res.status(400).send(
         'Request missing username or password param'
@@ -63,35 +85,21 @@ router.post('/login', async (req, res) => {
   
   });
 
-/* Logout Route
-========================================================= */
+/* Logout Route */
 router.delete('/logout', async (req, res) => {
 
-  // because the logout request needs to be send with
-  // authorization we should have access to the user
-  // on the req object, so we will try to find it and
-  // call the model method logout
   const { user, cookies: { auth_token: authToken } } = req
 
-  // we only want to attempt a logout if the user is
-  // present in the req object, meaning it already
-  // passed the authentication middleware. There is no reason
-  // the authToken should be missing at this point, check anyway
   if (user && authToken) {
     await req.user.logout(authToken);
     return res.status(204).send()
   }
 
-  // if the user missing, the user is not logged in, hence we
-  // use status code 400 indicating a bad request was made
-  // and send back a message
   return res.status(400).send(
     { errors: [{ message: 'not authenticated' }] }
   );
 });
 
-/* Me Route - get the currently logged in user
-========================================================= */
 router.get('/me', (req, res) => {
   if (req.user) {
     return res.send(req.user);

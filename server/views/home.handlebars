@@ -1,8 +1,8 @@
 <div class="ui grid container" style="margin-top:60px;">
-  <div class="four wide column">
+  <div class="six wide column">
 <h1 class="ui header" id="header">Wiki Flixx</h1>
 </div>
-  <div class="twelve wide column">
+  <div class="ten wide column">
 <form class="form ui">
   {{#if user}}
     <div class="form login-form">
@@ -17,7 +17,7 @@
       <input type="text" name="username" placeholder="username">
       </div>
        <div class="field">
-      <input type="text" name="password" placeholder="password">
+      <input type="password" name="password" placeholder="password">
       </div>
         <button class="ui button login">Login</button>
         <a class="ui button signup" href="/register">Signup</a>
@@ -25,7 +25,7 @@
     <div class="form signup-form">
       <div class="field"><input type="text" name="username" placeholder="username"></div>
       <div class="field"><input type="text" name="email" placeholder="email"></div>
-      <div class="field"><input type="text" name="password" placeholder="password"></div>
+      <div class="field"><input type="password" name="password" placeholder="password"></div>
       
 
       
@@ -65,7 +65,8 @@
             <div class="right menu">
                 <div class="item">
                 <div class="ui selection dropdown">
-                    <input type="hidden" name="genre">
+                  
+                    <input type="hidden" name="genre" value="{{user.genre}}">
                     <i class="dropdown icon"></i>
                     <div class="default text">Genre</div>
                     <div class="menu">
@@ -123,15 +124,30 @@
         </div>
 
         <hr>
+<div class="ui container" style="margin-top:50px;"><h2>Upcoming {{user.genre}} movies in 2019 </h2>
+        
 <div id="pagination-container">
     
-    <ul class="pagination"></ul>
+    <ul class="pagination" style="padding-left:0px;margin-bottom:30px;"></ul>
   </div> 
 
         <div class="ui link cards container" id="movie-container">
               
         </div>
+        </div>
 </body>
+
+<style>
+
+  .page-item {
+    background-color:#c5c5c5;
+    border-radius: 5px;
+    margin:5px;
+  }
+  .ui.cards a.card, .ui.link.card, .ui.link.cards .card, a.ui.card {
+    max-width: 200px !important;
+}
+</style>
 
 
 <script type="text/javascript">
@@ -161,10 +177,15 @@ var settings = {
             "'><br><h4>"+response.results[i].title+"</h4><h4>Release Date: "+moment(response.results[i].release_date,release_format).format('LL')+"</h4><button type='button' class='ui red basic button video-btn' data-toggle='modal' data-src='"+response.results[i].title+"' data-target='#myModal'>Play Trailer</button></div>").appendTo(appendrow);
         }
         for (var j=1;j<=response.total_pages;j++) {
-            var append_pagination = $('<li class="page-item"><a class="page-link" data-page="'+j+'"href="#">'+j+'</a></li>').appendTo($(".pagination"));
+            var append_pagination = $('<li class="page-item"><a class="page-item page-link" data-page="'+j+'"href="#">'+j+'</a></li>').appendTo($(".pagination"));
         
         }
       });
+
+
+
+
+      
   // ---------------------------------------------------------
   });
   
@@ -279,5 +300,16 @@ window.onclick = function(event) {
 $('.ui.dropdown')
   .dropdown()
 ;
-	  
+	  $( document ).ready(function() {
+        var favorite_genre =  "{{user.genre}}";
+
+favorite_genre = favorite_genre.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+    return letter.toUpperCase();
+});
+        if (favorite_genre != "") {
+$("div:contains('" + favorite_genre + "')").click();
+        }
+
+        
+      });
 </script>

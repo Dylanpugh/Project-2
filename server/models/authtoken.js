@@ -7,14 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
 
-  // set up the associations so we can make queries that include
-  // the related objects
   AuthToken.associate = function({ User }) {
     AuthToken.belongsTo(User);
   };
 
-  // generates a random 15 character token and
-  // associates it with a user
   AuthToken.generate = async function(UserId) {
     if (!UserId) {
       throw new Error('AuthToken requires a user ID')

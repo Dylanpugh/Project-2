@@ -19,13 +19,9 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// use the cookie-parser to help with auth token,
-// it must come before the customAuthMiddleware
 app.use(cookieParser());
 app.use(customAuthMiddleware);
 
-// serve up the public folder so we can request static
-// assets from our html document
 app.use(express.static("public"));
 
 // set up handlebars
@@ -47,9 +43,6 @@ const db = require('./models/index');
 
 // sync our sequelize models and then start server
 db.sequelize.sync().then(() => {
-  // inside our db sync callback, we start the server.
-  // this is our way of making sure the server is not listening
-  // to requests if we have not yet made a db connection
   app.listen(PORT, () => {
     console.log(`App listening on PORT ${PORT}`);
   });
