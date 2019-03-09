@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Practice</title>
+    <title>WikiFlixx</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
 
-    <h1 class="ui header" id="header">Wiki Flix</h1>
+    <h1 class="ui header" id="header">Wiki FlixX</h1>
     
 <html>
   <body>
@@ -42,45 +42,53 @@
                 <div class="item genre" data-genre="37">Western</div>
             </div>
             </div>
+        <div class="field">
+              <label >User Name</label>
+              <input class="userName" type="text" name="UserName" placeholder="userName">
         </div>
         <div class="field">
-          <label class="label">First Actor</label>
-          <input type="text" name="actors" placeholder="Actors/Actresses">
+          <label >Password</label>
+          <input type="text" class="password" name="Password" placeholder="Password">
+        </div>
         </div>
         <div class="field">
-          <label class="label">Second Actor</label>
-          <input type="text" name="movies" placeholder="Movies">
+          <label>First Actor</label>
+          <input type="text" class="actor1" name="actors" placeholder="Actors/Actresses">
+        </div>
+        <div class="field">
+          <label>Second Actor</label>
+          <input type="text" class="actor2" name="movies" placeholder="Movies">
         </div>  
       </div>
       <div class="field">
-        <label class="label">Third Actor</label>
-        <input type="text" name="movies" placeholder="Movies">
+        <label >Third Actor</label>
+        <input type="text" class="actor3" name="movies" placeholder="Movies">
       </div>
     </div>
     <div class="field">
-      <label class="label">Favorite First Movie</label>
-      <input type="text" name="movies" placeholder="Movies">
+      <label>Favorite First Movie</label>
+      <input type="text" class="movie1" name="movies" placeholder="Movies">
     </div>    </div>
     <div class="field">
-      <label class="label">Second Movie</label>
-      <input type="text" name="movies" placeholder="Movies">
+      <label >Second Movie</label>
+      <input type="text" class="movie2" name="movies" placeholder="Movies">
     </div>    
     </div>
     <div class="field">
-      <label class="label">Third Movie</label>
-      <input type="text" name="movies" placeholder="Movies">
+      <label >Third Movie</label>
+      <input type="text" class="movie3" name="movies" placeholder="Movies">
     </div>    
     </div>
     <div class="field">
-      <label class="label">Fourth Movie</label>
-      <input type="text" name="movies" placeholder="Movies">
+      <label >Fourth Movie</label>
+      <input type="text" class="movie4" name="movies" placeholder="Movies">
     </div>  
     <div class="field">
-      <label class="label">Fifth Movie</label>
-      <input type="text" name="movies" placeholder="Movies">
+      <label >Fifth Movie</label>
+      <input type="text" class="movie5" name="movies" placeholder="Movies">
     </div>                                                                 
-        <button class="ui button" type="submit">Submit</button>
       </form>
+      <button class="ui button" id="submit">Submit</button>
 
               
               
@@ -89,6 +97,35 @@
 </body>
 
 
-<script type="text/javascript" src="/public/js/index.js"></script>
+<script type="text/javascript">
+
+$("#submit").on("click", function(event) {
+      event.preventDefault();
+
+      var userData = {
+          userName: $(".userName").val(),
+          password: $(".password").val(),
+          actor1: $(".actor1").val(),
+          actor2: $(".actor2").val(),
+          actor3: $(".actor3").val(),
+          movie1: $(".movie1").val(),
+          movie2: $(".movie2").val(),
+          movie3: $(".movie3").val(),
+          movie4: $(".movie4").val(),
+          movie5: $(".movie5").val(),
+      }
+ console.log("about to do the post", userData)
+$.post("/api/userData", userData, function(data){
+console.log("we got this back", data);
+
+window.location="/";
+}
+)
+
+})
+
+
+
+</script>
 
 </html>

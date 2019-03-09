@@ -1,20 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
 
-  var userProfile = sequelize.define("userProfile", {
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-      isAlpha: true
-      }
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-      isAlpha: true
-      }  
-    },
+  var userProfile = sequelize.define("userProfile", { 
+  
     userName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -57,31 +44,26 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
       }    
     },
-    actor_ess1: {
+    actor1: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
       }    
     },
-    actor_ess2: {
+    actor2: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
       }    
     },
-    actor_ess3: {
+    actor3: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
       }    
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-      isEmail: true
-      }    
-    },
+      
+
 
   });
 
