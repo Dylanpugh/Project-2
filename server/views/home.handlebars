@@ -1,0 +1,283 @@
+<div class="ui grid container" style="margin-top:60px;">
+  <div class="four wide column">
+<h1 class="ui header" id="header">Wiki Flixx</h1>
+</div>
+  <div class="twelve wide column">
+<form class="form ui">
+  {{#if user}}
+    <div class="form login-form">
+      <p>Logged in as <strong>{{user.username}}</strong></p>
+      <div class="buttons">
+        <a class="ui button logout" href="#">Logout</a>
+      </div>
+    </div>
+  {{else}}
+    <div class="form login-form">
+      <div class="field">
+      <input type="text" name="username" placeholder="username">
+      </div>
+       <div class="field">
+      <input type="text" name="password" placeholder="password">
+      </div>
+        <button class="ui button login">Login</button>
+        <a class="ui button signup" href="/register">Signup</a>
+    </div>
+    <div class="form signup-form">
+      <div class="field"><input type="text" name="username" placeholder="username"></div>
+      <div class="field"><input type="text" name="email" placeholder="email"></div>
+      <div class="field"><input type="text" name="password" placeholder="password"></div>
+      
+
+      
+      
+      <div class="field">
+        <a class="ui button login" href="/">Login</a>
+        <button class="ui button signup">Signup</button>
+      </div>
+    </div>
+  {{/if}}
+</form>
+</div>
+  
+</div>
+    
+<div id="myModal" class="modal">
+
+  <div class="modal-content">
+    
+    <span class="close">&times;</span>
+    <p> <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always">></iframe></p>
+
+  </div>
+
+</div>
+  
+
+        <div class="ui pointing menu" id="bar">
+            <div class="header item">
+                <h3>Movie Search</h3>
+            </div>
+            <div class = "ui inverted segment">
+              <a href="survey"><button class="ui inverted red button">Survey</button></a>
+            </div>
+
+				
+            <div class="right menu">
+                <div class="item">
+                <div class="ui selection dropdown">
+                    <input type="hidden" name="genre">
+                    <i class="dropdown icon"></i>
+                    <div class="default text">Genre</div>
+                    <div class="menu">
+                        <div class="item genre" data-genre="28">Action</div>
+                        <div class="item genre" data-genre="12">Adventure</div>
+                        <div class="item genre" data-genre="16">Animation</div>
+                        <div class="item genre" data-genre="35">Comedy</div>
+                        <div class="item genre" data-genre="80">Crime</div>
+                        <div class="item genre" data-genre="99">Documentary</div>
+                        <div class="item genre" data-genre="18">Drama</div>
+                        <div class="item genre" data-genre="10751">Family</div>
+                        <div class="item genre" data-genre="14">Fantasy</div>
+                        <div class="item genre" data-genre="36">History</div>
+                        <div class="item genre" data-genre="27">Horror</div>
+                        <div class="item genre" data-genre="10402">Music</div>
+                        <div class="item genre" data-genre="9648">Mystery</div>
+                        <div class="item genre" data-genre="10749">Romance</div>
+                        <div class="item genre" data-genre="878">Science Fiction</div>
+                        <div class="item genre" data-genre="10770">TV Movie</div>
+                        <div class="item genre" data-genre="53">Thriller</div>
+                        <div class="item genre" data-genre="10752">War</div>
+                        <div class="item genre" data-genre="37">Western</div>
+                    </div>
+                    </div>
+                </div>
+                <div class="item">
+                        <div class="ui selection dropdown">
+                                <input type="hidden" name="month">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">Month</div>
+                                <div class="menu">
+                                    <div class="item month" data-start="2019-01-01" data-end="2019/01/31">January</div>
+                                    <div class="item month" data-start="2019-02-01" data-end="2019-02-28">February</div>
+                                    <div class="item month" data-start="2019-03-01" data-end="2019-03-31">March</div>
+                                    <div class="item month" data-start="2019-04-01" data-end="2019-04-30">April</div>
+                                    <div class="item month" data-start="2019-05-01" data-end="2019-05-31">May</div>
+                                    <div class="item month" data-start="2019-06-01" data-end="2019-06-30">June</div>
+                                    <div class="item month" data-start="2019-07-01" data-end="2019-07-31">July</div>
+                                    <div class="item month" data-start="2019-08-01" data-end="2019-08-31">August</div>
+                                    <div class="item month" data-start="2019-09-01" data-end="2019-09-30">September</div>
+                                    <div class="item month" data-start="2019-10-01" data-end="2019-10-31">October</div>
+                                    <div class="item month" data-start="2019-11-01" data-end="2019-11-30">November</div>
+                                    <div class="item month" data-start="2019-12-01" data-end="2019-12-31">December</div>
+                        </div>
+                </div>
+                </div>
+
+                <div class="item">
+                <div class="ui transparent icon input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search link icon"></i>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+<div id="pagination-container">
+    
+    <ul class="pagination"></ul>
+  </div> 
+
+        <div class="ui link cards container" id="movie-container">
+              
+        </div>
+</body>
+
+
+<script type="text/javascript">
+var genre = '';
+var start_date = '';
+var end_date = '';
+var page_number = '';
+var release_format = 'YYYY-MM-DD';
+var url = 'https://api.themoviedb.org/3/discover/movie?primary_release_year=2019&page=1&api_key=6f0a2ab68362abacd4411d8533c75937&with_genres='+genre+'&primary_release_date.gte='+start_date+'&primary_release_date.lte='+end_date+'&page='+page_number;
+$( document ).ready(function() {
+var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": url,
+    "method": "GET",
+    "headers": {},
+    "data": "{}"
+  }
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response.results);
+  
+  
+        for (var i=0; i < response.results.length; i++) {
+          var appendrow = $("<div class='ui centered card'></div>").appendTo("#movie-container");
+            $("<div class='image'><img src='https://image.tmdb.org/t/p/w500/" + response.results[i].poster_path  + 
+            "'><br><h4>"+response.results[i].title+"</h4><h4>Release Date: "+moment(response.results[i].release_date,release_format).format('LL')+"</h4><button type='button' class='ui red basic button video-btn' data-toggle='modal' data-src='"+response.results[i].title+"' data-target='#myModal'>Play Trailer</button></div>").appendTo(appendrow);
+        }
+        for (var j=1;j<=response.total_pages;j++) {
+            var append_pagination = $('<li class="page-item"><a class="page-link" data-page="'+j+'"href="#">'+j+'</a></li>').appendTo($(".pagination"));
+        
+        }
+      });
+  // ---------------------------------------------------------
+  });
+  
+  var videoSrc;  
+  $(document).on("click",".video-btn",function() {
+      videoSrc = $(this).data( "src" );
+  
+      console.log(videoSrc);
+      getRequest(videoSrc);
+      function getRequest(videoSrc) {
+      var video_url = 'https://www.googleapis.com/youtube/v3/search';
+      var params = {
+          part: 'snippet',
+          key: 'AIzaSyB4hCVbW3IzYNSdCGwQpkFW5ubHyv2a2go',
+          q: videoSrc
+      };
+    
+      $.getJSON(video_url, params, showResults);
+  }
+  
+  function showResults(results) {
+      var entries = results.items[0].id.videoId;
+      console.log(entries);
+      $("#video").attr('src', "https://www.youtube.com/embed/"+entries+"?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1" );
+  }
+  
+  });
+  
+  
+  $(document).on("click",".page-link",function() {
+    page_number = $(this).attr('data-page');
+	url = 'https://api.themoviedb.org/3/discover/movie?primary_release_year=2019&api_key=6f0a2ab68362abacd4411d8533c75937&with_genres='+genre+'&primary_release_date.gte='+start_date+'&primary_release_date.lte='+end_date+'&page='+page_number;
+    
+  search();
+  
+  });page_number
+  
+  // Genres
+  $(document).on("click",".genre",function() {
+	 
+    genre = $(this).attr('data-genre');
+	url = 'https://api.themoviedb.org/3/discover/movie?primary_release_year=2019&page=1&api_key=6f0a2ab68362abacd4411d8533c75937&with_genres='+genre+'&primary_release_date.gte='+start_date+'&primary_release_date.lte='+end_date;
+    search();
+  
+  
+  });
+  
+  $(document).on("click", ".month", function(){
+        start_date = $(this).attr('data-start');
+        end_date = $(this).attr('data-end');
+	url = 'https://api.themoviedb.org/3/discover/movie?primary_release_year=2019&page=1&api_key=6f0a2ab68362abacd4411d8533c75937&with_genres='+genre+'&primary_release_date.gte='+start_date+'&primary_release_date.lte='+end_date;
+    search();
+  
+    });
+  
+  function search() {
+        var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": url,
+    "method": "GET",
+    "headers": {},
+    "data": "{}"
+  }
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response.results);
+	
+	
+	
+  $( "#movie-container" ).empty();
+    $( ".pagination" ).empty();
+        for (var i=0; i < response.results.length; i++) {
+	
+	console.log(moment(response.results[i].release_date,release_format).format('LL'));
+	
+          var appendrow = $("<div class='ui centered card'></div>").appendTo("#movie-container");
+            $("<div class='image'><img src='https://image.tmdb.org/t/p/w500/" + response.results[i].poster_path  + 
+            "'><br><h4>"+response.results[i].title+"</h4><h4>Release Date: "+moment(response.results[i].release_date,release_format).format('LL')+"</h4><button type='button' class='ui red basic button video-btn' data-toggle='modal' data-src='"+response.results[i].title+"' data-target='#myModal'>Play Trailer</button></div>").appendTo(appendrow);
+        }
+		for (var j=1;j<=response.total_pages;j++) {
+            var append_pagination = $('<li class="page-item"><a class="page-link" data-page="'+j+'"href="#">'+j+'</a></li>').appendTo($(".pagination"));
+        
+        }
+        
+      });
+    }
+
+  
+  
+var modal = document.getElementById('myModal');
+
+var btn = $(".video-btn");
+
+var span = document.getElementsByClassName("close")[0];
+ 
+$(document).on("click",".video-btn",function() {
+  modal.style.display = "block";
+  });
+
+span.onclick = function() {
+  modal.style.display = "none";
+};
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+
+$('.ui.dropdown')
+  .dropdown()
+;
+	  
+</script>
