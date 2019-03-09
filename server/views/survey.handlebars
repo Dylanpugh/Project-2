@@ -10,14 +10,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
-
-    <h1 class="ui header" id="header">Wiki FlixX</h1>
+</head>
     
-<html>
+    
   <body>
+    
+    <div class="ui gride container" style="margin-top:50px;">
+      <h1 class="ui header" id="header">Wiki FlixX</h1>
     <form class="ui form">
+
+      <div class="ui raised segment">
+        <div class="field">
+              <label >User Name</label>
+              <input class="userName" type="text" name="UserName" placeholder="userName" value="{{ user.username }}">
+        </div>
+        <div class="field">
+              <label >Genre</label>
         <div class="ui selection dropdown">
-            <input type="hidden" name="genre">
+            <input type="hidden" id="genre" name="genre" value="{{ user.genre }}">
             <i class="dropdown icon"></i>
             <div class="default text">Genre</div>
             <div class="menu">
@@ -41,55 +51,62 @@
                 <div class="item genre" data-genre="10752">War</div>
                 <div class="item genre" data-genre="37">Western</div>
             </div>
-            </div>
-        <div class="field">
-              <label >User Name</label>
-              <input class="userName" type="text" name="UserName" placeholder="userName">
+          </div>
         </div>
-        <div class="field">
-          <label >Password</label>
-          <input type="text" class="password" name="Password" placeholder="Password">
-        </div>
-        </div>
+</div>
+        <div class="ui stackable two column grid">
+  <div class="column">
+      <div class="ui raised segment">
         <div class="field">
           <label>First Actor</label>
-          <input type="text" class="actor1" name="actors" placeholder="Actors/Actresses">
+          <input type="text" class="actor1" name="actors" placeholder="Actors/Actresses" value="{{ user.actor1 }}">
         </div>
         <div class="field">
           <label>Second Actor</label>
-          <input type="text" class="actor2" name="movies" placeholder="Movies">
-        </div>  
-      </div>
+          <input type="text" class="actor2" name="movies" placeholder="Movies" value="{{ user.actor2 }}">
+        </div> 
+      
       <div class="field">
         <label >Third Actor</label>
-        <input type="text" class="actor3" name="movies" placeholder="Movies">
+        <input type="text" class="actor3" name="movies" placeholder="Movies" value="{{ user.actor3 }}">
       </div>
-    </div>
-    <div class="field">
+      </div>
+  </div>
+  <div class="column">
+      <div class="ui raised segment">
+        <div class="field">
       <label>Favorite First Movie</label>
-      <input type="text" class="movie1" name="movies" placeholder="Movies">
-    </div>    </div>
+      <input type="text" class="movie1" name="movies" placeholder="Movies" value="{{ user.movie1 }}">
+    </div>  
     <div class="field">
       <label >Second Movie</label>
-      <input type="text" class="movie2" name="movies" placeholder="Movies">
-    </div>    
-    </div>
+      <input type="text" class="movie2" name="movies" placeholder="Movies" value="{{ user.movie2 }}">
+    </div>   
     <div class="field">
       <label >Third Movie</label>
-      <input type="text" class="movie3" name="movies" placeholder="Movies">
-    </div>    
-    </div>
+      <input type="text" class="movie3" name="movies" placeholder="Movies" value="{{ user.movie3 }}">
+    </div> 
     <div class="field">
       <label >Fourth Movie</label>
-      <input type="text" class="movie4" name="movies" placeholder="Movies">
+      <input type="text" class="movie4" name="movies" placeholder="Movies" value="{{ user.movie4 }}">
     </div>  
     <div class="field">
       <label >Fifth Movie</label>
-      <input type="text" class="movie5" name="movies" placeholder="Movies">
-    </div>                                                                 
-      </form>
-      <button class="ui button" id="submit">Submit</button>
+      <input type="text" class="movie5" name="movies" placeholder="Movies" value="{{ user.movie5 }}">
+    </div>
+      </div>
+  </div>
+</div>
+        
+    <div style="margin-top:20px;text-align:center;">
+<button class="ui huge button" id="submit">Submit</button>
 
+    </div>
+                                                                   
+      </form>
+      
+      
+</div>
               
               
 
@@ -100,6 +117,7 @@
 <script type="text/javascript">
 
 $("#submit").on("click", function(event) {
+  
       event.preventDefault();
 
       var userData = {
@@ -113,19 +131,27 @@ $("#submit").on("click", function(event) {
           movie3: $(".movie3").val(),
           movie4: $(".movie4").val(),
           movie5: $(".movie5").val(),
+          genre: $("#genre").val(),
       }
  console.log("about to do the post", userData)
-$.post("/api/userData", userData, function(data){
-console.log("we got this back", data);
+  $.post("/api/userData", userData, function(data){
+  console.log("we got this back", data);
 
-window.location="/";
-}
+  
+  }
 )
+window.location.replace("/");
+});
 
-})
-
-
+$('.ui.dropdown')
+  .dropdown()
+;
 
 </script>
-
+<style>
+  label {
+    font-size:1.157143em !important;
+    margin-bottom:15px !important;
+  }
+</style>
 </html>
