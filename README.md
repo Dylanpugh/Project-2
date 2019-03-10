@@ -31,11 +31,11 @@ A few screenshots from the application to describe functionality.<>
 </h2>
 <h3>
 First the homepage:</br>
-<img src="images/homepage.jpg">
+<img src="images/homepage.png"></br>
 Now the signup Page:</br>
-<img src ="images/signup.jpg">
+<img src ="images/signup.png"></br>
 And the survey page:</br>
-<img src ="images/survey.jpg">
+<img src ="images/survey.png">
 
 </h3>
 
